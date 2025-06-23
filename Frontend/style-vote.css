@@ -1,0 +1,95 @@
+body {
+  font-family: "Segoe UI", sans-serif;
+  background-image: url(Logos/fing.jpg);
+  background-size: cover;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 30px 20px;
+  text-align: center;
+  background-color: rgb(46 184 170 / 48%);
+  border-radius: 12px;
+  margin-top: 40px;
+}
+
+h2 {
+  color: #222;
+  margin-bottom: 20px;
+}
+
+select {
+  padding: 10px;
+  font-size: 16px;
+  margin: 15px 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+#candidateList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.candidate-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 220px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.candidate-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.candidate-photo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.party-logo {
+  width: 30px;
+  height: 30px;
+  margin-top: 8px;
+}
+
+.candidate-info {
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+input[type="radio"] {
+  margin-top: 10px;
+}
+
+button#submitVote {
+  margin-top: 30px;
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button#submitVote:hover {
+  background-color: #45a049;
+}
+
