@@ -1,12 +1,24 @@
-// models/Candidate.js
-const mongoose = require("mongoose");
+const jwt = require("jsonwebtoken");
+const fs = require('fs');
+const path = require('path');
 
-const candidateSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  party: { type: String, required: true },
-  state: { type: String, required: true },
-  logo: { type: String }, // logo URL
-  votes: { type: Number, default: 0 }
-});
+// Ensure uploads directory exists
+const uploadsDir = path.join(__dirname, '..', 'uploads');
+if (!fs.existsSync(uploadsDir)) {
+    fs.mkdirSync(uploadsDir, { recursive: true });
+}
 
-module.exports = mongoose.model("Candidate", candidateSchema);
+const auth = (req, res, next) => {
+    try {
+        const token = req.header("Authorization")?.replace("Bearer ", "");
+        if (!token) return res.status(401).json({ message: "No token provided" });
+
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        req.user = decoded;
+        next();
+    } catch (error) {
+        res.status(401).json({ message: "Invalid token" });
+    }
+};
+
+module.exports = auth;
