@@ -1,15 +1,25 @@
-// models/User.js
-const mongoose = require("mongoose");
+const jwt = require("jsonwebtoken");
+const fs = require('fs');
+const path = require('path');
 
-const userSchema = new mongoose.Schema({
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-  phone: { type: String, required: true },
-  dob: { type: Date, required: true },
-  state: { type: String, required: true },
-  idProofUrl: { type: String }, // For future file upload support
-  hasVoted: { type: Boolean, default: false }
-});
+// Ensure uploads directory exists
+const uploadsDir = path.join(__dirname, '..', 'uploads');
+if (!fs.existsSync(uploadsDir)) {
+    fs.mkdirSync(uploadsDir, { recursive: true });
+}
 
-module.exports = mongoose.model("User", userSchema);
+const auth = (req, res, next) => {
+    try {
+        const token = req.header("Authorization")?.replace("Bearer ", "");
+        if (!token) return res.status(401).json({ message: "No token provided" });
+
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        req.user = decoded;
+        next();
+    } catch (error) {
+        res.status(401).json({ message: "Invalid token" });
+    }
+};
+
+module.exports = auth;
 
