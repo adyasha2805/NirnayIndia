@@ -1,14 +1,25 @@
-// models/Vote.js
-const mongoose = require("mongoose");
+const jwt = require("jsonwebtoken");
+const fs = require('fs');
+const path = require('path');
 
-const voteSchema = new mongoose.Schema({
-  user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-  candidate: { type: mongoose.Schema.Types.ObjectId, ref: "Candidate", required: true },
-  state: { type: String, required: true },
-  createdAt: { type: Date, default: Date.now }
-});
+// Ensure uploads directory exists
+const uploadsDir = path.join(__dirname, '..', 'uploads');
+if (!fs.existsSync(uploadsDir)) {
+    fs.mkdirSync(uploadsDir, { recursive: true });
+}
 
-module.exports = mongoose.model("Vote", voteSchema);
+const auth = (req, res, next) => {
+    try {
+        const token = req.header("Authorization")?.replace("Bearer ", "");
+        if (!token) return res.status(401).json({ message: "No token provided" });
 
-module.exports = mongoose.model('Vote', voteSchema);
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        req.user = decoded;
+        next();
+    } catch (error) {
+        res.status(401).json({ message: "Invalid token" });
+    }
+};
+
+module.exports = auth;
 
