@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="style-admin.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Admin Panel</h1>
+
+    <section id="addCandidate">
+      <h2>Add Candidate</h2>
+      <form id="addCandidateForm">
+        <input type="text" id="name" placeholder="Candidate Name" required />
+        <input type="text" id="party" placeholder="Party Name" required />
+        <input type="text" id="state" placeholder="State" required />
+        <input type="text" id="logo" placeholder="Party Logo URL" />
+        <button type="submit">Add Candidate</button>
+      </form>
+    </section>
+
+    <section id="deleteCandidate">
+      <h2>Delete Candidate</h2>
+      <form id="deleteCandidateForm">
+        <input type="text" id="delName" placeholder="Candidate Name" required />
+        <input type="text" id="delState" placeholder="State" required />
+        <button type="submit">Delete Candidate</button>
+      </form>
+    </section>
+
+    <section id="results">
+      <h2>Voting Results</h2>
+      <button id="loadResults">Load Results</button>
+      <div id="resultsTable"></div>
+    </section>
+    <!-- Add this after your existing sections -->
+     <section id="currentCandidates">
+      <h2>Current Candidates</h2>
+      <div id="candidatesList"></div>
+    </section>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

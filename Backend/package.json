@@ -1,0 +1,33 @@
+{
+  "name": "online-voting-system",
+  "version": "1.0.0",
+  "description": "A secure online voting system using Node.js, Express, and MongoDB",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [
+    "voting",
+    "nodejs",
+    "express",
+    "mongodb",
+    "jwt",
+    "online voting system"
+  ],
+  "author": "Adyasha Suvadarshini",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.16.1",
+    "multer": "^2.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  },
+  "type": "commonjs"
+}
